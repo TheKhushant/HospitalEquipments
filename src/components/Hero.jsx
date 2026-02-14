@@ -100,7 +100,7 @@ export function Hero() {
           <div className="relative">
             <div className="relative bg-white rounded-2xl shadow-2xl p-8">
               <img
-                src="https://tse3.mm.bing.net/th?id=OIP.teuGPtJuMaxnR-NWD5Du8gHaEK&pid=Api&P=0&h=180"
+                src="./Home/img.png"
                 alt="Medical Equipment"
                 className="w-full h-auto rounded-lg"
               />
