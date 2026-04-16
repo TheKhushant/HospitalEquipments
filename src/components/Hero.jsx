@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "../components/ui/Button"; // Adjust path to your components
-import { Badge } from "../components/ui/badge";
+import { Badge } from "../components/ui/Badge";
 import {
   Shield,
   Award,

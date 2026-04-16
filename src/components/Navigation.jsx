@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "../components/ui/Button.jsx";
-import { Badge } from "../components/ui/badge";
+import { Badge } from "../components/ui/Badge.jsx";
 import {
   Sheet,
   SheetContent,
