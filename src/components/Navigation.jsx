@@ -48,6 +48,7 @@ export function Navigation() {
               {[
                 { label: "Home", path: "/" },
                 { label: "Shop", path: "/shop" },
+                { label: "Hospital Planner", path: "/hospital-planner" },
                 { label: "About", path: "/about" },
               ].map((item) => (
                 <NavigationMenuItem key={item.path}>
@@ -154,6 +155,7 @@ export function Navigation() {
                   {[
                     { label: "Home", path: "/" },
                     { label: "Shop", path: "/shop" },
+                    { label: "Hospital Planner", path: "/hospital-planner" },
                     { label: "About", path: "/about" },
                   ].map((item) => (
                     <Link

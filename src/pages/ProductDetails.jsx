@@ -14,7 +14,11 @@ import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { ProductCard } from "@/components/ProductCard";
 import { useCart } from "@/context/CartContext";
+import { useComparison } from "@/context/ComparisonContext";
 import { products } from "@/data/products";
+import BulkDiscountCalculator from "@/components/BulkDiscountCalculator";
+import FrequentlyBoughtTogether from "@/components/FrequentlyBoughtTogether";
+import RFQDialog from "@/components/RFQDialog";
 import {
   Star,
   Heart,
@@ -27,6 +31,7 @@ import {
   Minus,
   Plus,
   ArrowLeft,
+  Scale,
 } from "lucide-react";
 import { cn } from "@/lib/Utils";
 
@@ -35,7 +40,9 @@ const ProductDetail = () => {
   const [quantity, setQuantity] = useState(1);
   const [isLiked, setIsLiked] = useState(false);
   const [selectedImage, setSelectedImage] = useState(0);
+  const [isRFQOpen, setIsRFQOpen] = useState(false);
   const { addItem } = useCart();
+  const { toggleComparison, isInComparison } = useComparison();
 
   const product = products.find((p) => p.id === id);
 
@@ -192,6 +199,16 @@ const ProductDetail = () => {
                 </span>
               </div>
 
+              {/* MOQ Info */}
+              {product.moq && (
+                <div className="flex items-center gap-2 mb-6 p-3 bg-blue-50 rounded-lg">
+                  <Scale className="h-4 w-4 text-blue-600" />
+                  <span className="text-sm text-blue-900">
+                    Minimum Order Quantity: <strong>{product.moq}</strong> unit(s)
+                  </span>
+                </div>
+              )}
+
               <p className="text-muted-foreground mb-6">
                 {product.description}
               </p>
@@ -238,7 +255,7 @@ const ProductDetail = () => {
                 </span>
               </div>
 
-              <div className="flex gap-4">
+              <div className="flex gap-2 flex-col sm:flex-row">
                 <Button
                   size="lg"
                   className="flex-1"
@@ -248,9 +265,28 @@ const ProductDetail = () => {
                   <ShoppingCart className="h-5 w-5 mr-2" />
                   Add to Cart
                 </Button>
-                <Button variant="outline" size="lg">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  onClick={() => setIsRFQOpen(true)}
+                >
                   <Phone className="h-5 w-5 mr-2" />
-                  Call for Quote
+                  Get Quote
+                </Button>
+              </div>
+
+              <div className="flex gap-2">
+                <Button
+                  variant="outline"
+                  className="flex-1"
+                  onClick={() => toggleComparison(product)}
+                  className={cn(
+                    "flex-1",
+                    isInComparison(product.id) && "bg-blue-50 border-blue-500"
+                  )}
+                >
+                  <Scale className="h-4 w-4 mr-2" />
+                  {isInComparison(product.id) ? "In Comparison" : "Compare"}
                 </Button>
               </div>
             </div>
@@ -271,6 +307,16 @@ const ProductDetail = () => {
               </div>
             </div>
           </div>
+        </div>
+
+        {/* Bulk Discount Calculator */}
+        <div className="mt-16">
+          <h2 className="text-2xl font-display font-bold mb-8">
+            Bulk Pricing & Discounts
+          </h2>
+          <BulkDiscountCalculator product={product} onQuantityChange={(qty, pricing) => {
+            setQuantity(qty);
+          }} />
         </div>
 
         {/* Tabs */}
@@ -400,6 +446,11 @@ const ProductDetail = () => {
           </Tabs>
         </div>
 
+        {/* Frequently Bought Together */}
+        <div className="mt-16">
+          <FrequentlyBoughtTogether productId={product.id} />
+        </div>
+
         {/* Related Products */}
         {relatedProducts.length > 0 && (
           <div className="mt-16">
@@ -413,6 +464,13 @@ const ProductDetail = () => {
             </div>
           </div>
         )}
+
+        {/* RFQ Dialog */}
+        <RFQDialog
+          isOpen={isRFQOpen}
+          onClose={() => setIsRFQOpen(false)}
+          product={product}
+        />
       </div>
 
       <Footer />

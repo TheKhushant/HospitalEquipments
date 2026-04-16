@@ -280,6 +280,14 @@ export const products = [
     rating: 4.8,
     reviewCount: 127,
     inStock: true,
+    moq: 2,
+    bulkPrices: [
+      { quantity: 5, price: 12399 },
+      { quantity: 10, price: 11899 },
+      { quantity: 20, price: 11299 },
+    ],
+    brochureUrl: "/brochures/patient-monitor-pro.pdf",
+    frequentlyBoughtWith: ["pm-002", "sg-001"],
     features: [
       "15-inch HD touchscreen",
       "Wireless connectivity",
@@ -308,6 +316,13 @@ export const products = [
     rating: 4.9,
     reviewCount: 89,
     inStock: true,
+    moq: 1,
+    bulkPrices: [
+      { quantity: 2, price: 85999 },
+      { quantity: 3, price: 81999 },
+    ],
+    brochureUrl: "/brochures/digital-xray-system.pdf",
+    frequentlyBoughtWith: ["dg-002", "sp-001"],
     features: [
       "High-resolution imaging",
       "PACS integration",
@@ -337,6 +352,14 @@ export const products = [
     rating: 4.7,
     reviewCount: 203,
     inStock: true,
+    moq: 3,
+    bulkPrices: [
+      { quantity: 10, price: 2199 },
+      { quantity: 20, price: 1999 },
+      { quantity: 50, price: 1799 },
+    ],
+    brochureUrl: "/brochures/surgical-instrument-set.pdf",
+    frequentlyBoughtWith: ["sp-001", "pm-001"],
     features: [
       "Premium stainless steel",
       "Autoclavable design",
@@ -365,6 +388,14 @@ export const products = [
     rating: 4.9,
     reviewCount: 156,
     inStock: true,
+    moq: 1,
+    bulkPrices: [
+      { quantity: 5, price: 3799 },
+      { quantity: 10, price: 3599 },
+      { quantity: 20, price: 3299 },
+    ],
+    brochureUrl: "/brochures/aed-defibrillator.pdf",
+    frequentlyBoughtWith: ["pm-002", "sp-001"],
     features: [
       "Voice guidance system",
       "LCD display",
@@ -394,6 +425,14 @@ export const products = [
     rating: 4.6,
     reviewCount: 1289,
     inStock: true,
+    moq: 10,
+    bulkPrices: [
+      { quantity: 50, price: 79 },
+      { quantity: 100, price: 69 },
+      { quantity: 500, price: 59 },
+    ],
+    brochureUrl: "/brochures/medical-gloves.pdf",
+    frequentlyBoughtWith: ["sg-001", "em-001"],
     features: [
       "Powder-free formula",
       "Latex-free material",
@@ -422,6 +461,13 @@ export const products = [
     rating: 4.8,
     reviewCount: 67,
     inStock: true,
+    moq: 1,
+    bulkPrices: [
+      { quantity: 2, price: 43999 },
+      { quantity: 5, price: 41999 },
+    ],
+    brochureUrl: "/brochures/portable-ventilator.pdf",
+    frequentlyBoughtWith: ["pm-001", "dg-001"],
     features: [
       "Multiple ventilation modes",
       "Integrated monitoring",
@@ -450,6 +496,14 @@ export const products = [
     rating: 4.5,
     reviewCount: 245,
     inStock: true,
+    moq: 2,
+    bulkPrices: [
+      { quantity: 5, price: 1799 },
+      { quantity: 10, price: 1699 },
+      { quantity: 20, price: 1599 },
+    ],
+    brochureUrl: "/brochures/vital-signs-monitor.pdf",
+    frequentlyBoughtWith: ["pm-001", "em-001"],
     features: [
       "4-in-1 measurements",
       "Wireless transmission",
@@ -479,6 +533,13 @@ export const products = [
     rating: 4.7,
     reviewCount: 98,
     inStock: true,
+    moq: 1,
+    bulkPrices: [
+      { quantity: 2, price: 32999 },
+      { quantity: 3, price: 30999 },
+    ],
+    brochureUrl: "/brochures/ultrasound-scanner.pdf",
+    frequentlyBoughtWith: ["dg-001", "pm-001"],
     features: [
       "Advanced imaging",
       "Multiple probe options",

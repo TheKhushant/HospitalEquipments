@@ -4,13 +4,15 @@ import { Button } from "@/components/ui/Button";
 import { Card, CardContent, CardFooter } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import { useCart } from "@/context/CartContext";
-import { Heart, Star, ShoppingCart } from "lucide-react";
+import { useComparison } from "@/context/ComparisonContext";
+import { Heart, Star, ShoppingCart, Checkbox } from "lucide-react";
 import { cn } from "@/lib/Utils";
 
 export function ProductCard({ product, className }) {
   const [isLiked, setIsLiked] = useState(false);
   const [isAddingToCart, setIsAddingToCart] = useState(false);
   const { addItem } = useCart();
+  const { toggleComparison, isInComparison } = useComparison();
 
   const handleAddToCart = async (e) => {
     e.preventDefault();
@@ -140,9 +142,16 @@ export function ProductCard({ product, className }) {
               <p className="line-clamp-2">{product.description}</p>
             </div>
             
+            {/* MOQ */}
+            {product.moq && (
+              <div className="text-xs text-blue-600 font-semibold">
+                MOQ: {product.moq} unit(s)
+              </div>
+            )}
+
             {/* Certifications */}
             {product.certifications && product.certifications.length > 0 && (
-              <div className="flex gap-1">
+              <div className="flex gap-1 flex-wrap">
                 {product.certifications.slice(0, 2).map((cert) => (
                   <Badge key={cert} variant="secondary" className="text-xs">
                     {cert}
@@ -154,9 +163,9 @@ export function ProductCard({ product, className }) {
         </CardContent>
       </Link>
 
-      <CardFooter className="p-4 pt-0">
+      <CardFooter className="p-4 pt-0 flex gap-2">
         <Button
-          className="w-full"
+          className="flex-1"
           onClick={handleAddToCart}
           disabled={!product.inStock || isAddingToCart}
         >
@@ -170,13 +179,28 @@ export function ProductCard({ product, className }) {
               {product.inStock ? (
                 <>
                   <ShoppingCart className="h-4 w-4 mr-2" />
-                  Add to Cart
+                  Add
                 </>
               ) : (
                 "Out of Stock"
               )}
             </>
           )}
+        </Button>
+        <Button
+          variant="outline"
+          size="icon"
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            toggleComparison(product);
+          }}
+          className={cn(
+            isInComparison(product.id) && "bg-blue-50 border-blue-500"
+          )}
+          title="Add to comparison"
+        >
+          <Checkbox size={18} />
         </Button>
       </CardFooter>
     </Card>
