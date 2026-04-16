@@ -28,7 +28,7 @@ import {
   Plus,
   ArrowLeft,
 } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/Utils";
 
 const ProductDetail = () => {
   const { id } = useParams();
