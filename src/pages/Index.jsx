@@ -34,35 +34,35 @@ const Index = () => {
       <Hero />
 
       {/* Categories Section */}
-      <section className="py-16 bg-muted/30">
+      <section className="py-20 bg-secondary/30 border-y border-border/30">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-display font-bold mb-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl lg:text-5xl font-bold mb-6 text-balance">
               Shop by Category
             </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
               Find the exact medical equipment you need from our comprehensive
               categories, all backed by our quality guarantee.
             </p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5">
             {categories.map((category) => (
               <Link
                 key={category.id}
                 to={`/shop?category=${category.id}`}
                 className="group"
               >
-                <Card className="text-center hover:shadow-lg transition-shadow duration-300">
+                <Card className="text-center hover:shadow-md hover:border-primary/30 transition-all duration-300 border-border/50 bg-card/80 backdrop-blur-sm">
                   <CardContent className="p-6">
-                    <div className="mb-4 flex justify-center">
+                    <div className="mb-4 flex justify-center h-20 items-center">
                       <img
                         src={category.image}
                         alt={category.name}
-                        className="h-16 w-16 object-contain group-hover:scale-110 transition-transform"
+                        className="h-16 w-16 object-contain group-hover:scale-125 transition-transform duration-300"
                       />
                     </div>
-                    <h3 className="font-semibold text-sm mb-2 group-hover:text-primary transition-colors">
+                    <h3 className="font-semibold text-sm mb-2 text-foreground group-hover:text-primary transition-colors duration-300 line-clamp-2">
                       {category.name}
                     </h3>
                     <p className="text-xs text-muted-foreground line-clamp-2">
@@ -77,21 +77,21 @@ const Index = () => {
       </section>
 
       {/* Featured Products */}
-      <section className="py-16">
+      <section className="py-20">
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between mb-12">
-            <div>
-              <h2 className="text-3xl lg:text-4xl font-display font-bold mb-4">
+          <div className="flex items-end justify-between mb-16 flex-wrap gap-6">
+            <div className="flex-1">
+              <h2 className="text-4xl lg:text-5xl font-bold mb-4">
                 Featured Products
               </h2>
-              <p className="text-lg text-muted-foreground">
-                Our most popular and trusted medical equipment
+              <p className="text-lg text-muted-foreground max-w-2xl">
+                Our most popular and trusted medical equipment, selected for hospitals worldwide
               </p>
             </div>
-            <Button variant="outline" asChild>
-              <Link to="/shop">
-                View All
-                <ArrowRight className="ml-2 h-4 w-4" />
+            <Button variant="outline" asChild className="shrink-0">
+              <Link to="/shop" className="gap-2">
+                View All Products
+                <ArrowRight className="h-4 w-4" />
               </Link>
             </Button>
           </div>
@@ -105,19 +105,19 @@ const Index = () => {
       </section>
 
       {/* Best Sellers */}
-      <section className="py-16 bg-muted/30">
+      <section className="py-20 bg-secondary/30 border-y border-border/30">
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between mb-12">
-            <div>
-              <h2 className="text-3xl lg:text-4xl font-display font-bold mb-4">
+          <div className="flex items-end justify-between mb-16 flex-wrap gap-6">
+            <div className="flex-1">
+              <h2 className="text-4xl lg:text-5xl font-bold mb-4">
                 Best Sellers
               </h2>
-              <p className="text-lg text-muted-foreground">
-                Most trusted by healthcare professionals
+              <p className="text-lg text-muted-foreground max-w-2xl">
+                Most trusted and recommended by healthcare professionals
               </p>
             </div>
-            <Button variant="outline" asChild>
-              <Link to="/shop">
+            <Button variant="outline" asChild className="shrink-0">
+              <Link to="/shop" className="gap-2">
                 View All
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
@@ -158,75 +158,45 @@ const Index = () => {
       )}
 
       {/* Why Choose Us */}
-      <section className="py-16 bg-primary text-primary-foreground">
+      <section className="py-20 bg-primary text-primary-foreground">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-display font-bold mb-4">
-              Why Healthcare Professionals Choose Us
+          <div className="text-center mb-16">
+            <h2 className="text-4xl lg:text-5xl font-bold mb-6 text-balance">
+              Why Healthcare Professionals Choose AllCare
             </h2>
-            <p className="text-lg opacity-90 max-w-2xl mx-auto">
+            <p className="text-xl opacity-90 max-w-3xl mx-auto leading-relaxed">
               We understand the critical nature of medical equipment and provide
-              unmatched quality, service, and support.
+              unmatched quality, service, and support backed by decades of experience.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="text-center">
-              <div className="h-16 w-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Shield className="h-8 w-8" />
+            {[
+              { icon: Shield, title: "FDA Approved", desc: "All products meet strict FDA standards and medical device regulations" },
+              { icon: Truck, title: "Fast Delivery", desc: "Next-day delivery available for urgent medical equipment needs" },
+              { icon: Clock, title: "24/7 Support", desc: "Expert technical support available around the clock" },
+              { icon: Award, title: "Quality Certified", desc: "ISO 13485 certified for consistent excellence" }
+            ].map((item, i) => (
+              <div key={i} className="text-center">
+                <div className="h-20 w-20 bg-white/15 rounded-full flex items-center justify-center mx-auto mb-6 border border-white/20">
+                  <item.icon className="h-10 w-10" />
+                </div>
+                <h3 className="font-semibold text-lg mb-3">{item.title}</h3>
+                <p className="opacity-90 leading-relaxed">{item.desc}</p>
               </div>
-              <h3 className="font-semibold text-lg mb-2">
-                FDA Approved Products
-              </h3>
-              <p className="opacity-90">
-                All our products meet strict FDA standards and regulations for
-                medical devices.
-              </p>
-            </div>
-
-            <div className="text-center">
-              <div className="h-16 w-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Truck className="h-8 w-8" />
-              </div>
-              <h3 className="font-semibold text-lg mb-2">Fast Delivery</h3>
-              <p className="opacity-90">
-                Next-day delivery available for urgent medical equipment needs.
-              </p>
-            </div>
-
-            <div className="text-center">
-              <div className="h-16 w-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Clock className="h-8 w-8" />
-              </div>
-              <h3 className="font-semibold text-lg mb-2">24/7 Support</h3>
-              <p className="opacity-90">
-                Expert technical support available around the clock for critical
-                situations.
-              </p>
-            </div>
-
-            <div className="text-center">
-              <div className="h-16 w-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Award className="h-8 w-8" />
-              </div>
-              <h3 className="font-semibold text-lg mb-2">Quality Guaranteed</h3>
-              <p className="opacity-90">
-                ISO 13485 certified quality management ensures consistent
-                excellence.
-              </p>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Testimonials */}
-      <section className="py-16 bg-muted/30">
+      <section className="py-20 bg-secondary/20 border-y border-border/30">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-display font-bold mb-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl lg:text-5xl font-bold mb-6">
               Trusted by Healthcare Professionals
             </h2>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               See what medical professionals say about our products and service
             </p>
           </div>
@@ -274,38 +244,44 @@ const Index = () => {
       </section>
 
       {/* Newsletter/CTA Section */}
-      <section className="py-16">
+      <section className="py-20">
         <div className="container mx-auto px-4">
-          <Card className="bg-gradient-to-r from-primary to-primary/80 text-primary-foreground">
-            <CardContent className="p-12 text-center">
-              <h2 className="text-3xl font-display font-bold mb-4">
-                Stay Updated with Latest Medical Equipment
+          <Card className="bg-gradient-to-br from-primary via-primary to-primary/90 text-primary-foreground border-0 shadow-lg">
+            <CardContent className="p-16 text-center">
+              <h2 className="text-4xl font-bold mb-6 text-balance">
+                Get the Latest Medical Equipment Updates
               </h2>
-              <p className="text-lg opacity-90 mb-8 max-w-2xl mx-auto">
-                Get notified about new product launches, special offers, and
+              <p className="text-xl opacity-95 mb-10 max-w-2xl mx-auto leading-relaxed">
+                Subscribe to our newsletter for new product launches, special offers, and
                 important updates in medical technology.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+              <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto mb-8">
                 <input
                   type="email"
                   placeholder="Enter your email"
-                  className="flex-1 px-4 py-3 rounded-lg text-foreground"
+                  className="flex-1 px-4 py-3 rounded-lg text-foreground bg-white/95"
                 />
                 <Button
                   size="lg"
-                  className="bg-white text-primary hover:bg-white/90"
+                  className="bg-white text-primary hover:bg-white/90 font-semibold"
                 >
                   Subscribe
                 </Button>
               </div>
-              <div className="flex items-center justify-center gap-8 mt-8 text-sm opacity-90">
+              <div className="flex items-center justify-center gap-6 text-sm opacity-90 flex-wrap">
                 <div className="flex items-center gap-2">
                   <CheckCircle className="h-4 w-4" />
-                  <span>No spam, ever</span>
+                  <span>No spam</span>
                 </div>
+                <span className="text-white/40">•</span>
                 <div className="flex items-center gap-2">
                   <CheckCircle className="h-4 w-4" />
                   <span>Unsubscribe anytime</span>
+                </div>
+                <span className="text-white/40">•</span>
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="h-4 w-4" />
+                  <span>Secure & encrypted</span>
                 </div>
               </div>
             </CardContent>

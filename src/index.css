@@ -86,4 +86,31 @@
   .text-balance {
     text-wrap: balance;
   }
+  
+  /* Professional shadows */
+  .shadow-card {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  }
+  
+  .shadow-card-lg {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Smooth transitions */
+  .transition-smooth {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  /* Text utilities */
+  .font-display {
+    font-family: inherit;
+  }
+  
+  /* Gradient text */
+  .gradient-text {
+    background: linear-gradient(135deg, hsl(204, 100%, 41%) to hsl(204, 89%, 51%));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
 }

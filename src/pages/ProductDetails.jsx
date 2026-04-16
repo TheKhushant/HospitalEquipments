@@ -93,18 +93,18 @@ const ProductDetail = () => {
       <div className="container mx-auto px-4 py-8">
         {/* Breadcrumb */}
         <div className="flex items-center gap-2 text-sm text-muted-foreground mb-8">
-          <Link to="/" className="hover:text-foreground">
+          <Link to="/" className="hover:text-foreground transition-colors">
             Home
           </Link>
-          <span>/</span>
-          <Link to="/shop" className="hover:text-foreground">
+          <span className="text-border/50">/</span>
+          <Link to="/shop" className="hover:text-foreground transition-colors">
             Shop
           </Link>
-          <span>/</span>
-          <span className="text-foreground">{product.name}</span>
+          <span className="text-border/50">/</span>
+          <span className="text-foreground font-medium">{product.name}</span>
         </div>
 
-        <Button variant="ghost" className="mb-6" asChild>
+        <Button variant="ghost" className="mb-8 text-muted-foreground hover:text-foreground" asChild>
           <Link to="/shop">
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back to Products
@@ -114,10 +114,11 @@ const ProductDetail = () => {
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Product Images */}
           <div className="space-y-4">
-            <div className="relative bg-muted rounded-lg overflow-hidden">
+            <div className="relative bg-secondary/50 rounded-lg overflow-hidden border border-border/50 h-96">
               <img
                 src={product.image}
                 alt={product.name}
+                className="w-full h-full object-cover"
                 className="w-full h-96 lg:h-[500px] object-cover"
               />
               {discountPercentage > 0 && (

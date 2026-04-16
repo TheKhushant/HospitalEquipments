@@ -38,20 +38,20 @@ const BulkDiscountCalculator = ({ product, onQuantityChange }) => {
   };
 
   return (
-    <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-6 border border-blue-200">
-      <h3 className="text-lg font-semibold text-gray-900 mb-4">
+    <div className="bg-primary/5 rounded-lg p-6 border border-primary/20">
+      <h3 className="text-lg font-bold text-foreground mb-6">
         Bulk Discount Calculator
       </h3>
 
       {/* Quantity Selector */}
       <div className="mb-6">
-        <label className="block text-sm font-medium text-gray-700 mb-2">
+        <label className="block text-sm font-semibold text-foreground mb-3">
           Order Quantity
         </label>
-        <div className="flex items-center gap-2 bg-white rounded-lg border border-gray-300">
+        <div className="flex items-center gap-0 bg-card rounded-lg border border-border/50 overflow-hidden">
           <button
             onClick={decrementQuantity}
-            className="px-3 py-2 text-gray-600 hover:bg-gray-100"
+            className="px-4 py-2 text-muted-foreground hover:bg-secondary/50 transition-colors"
           >
             −
           </button>
@@ -60,17 +60,17 @@ const BulkDiscountCalculator = ({ product, onQuantityChange }) => {
             value={quantity}
             onChange={handleQuantityChange}
             min={product.moq || 1}
-            className="border-0 focus:ring-0 text-center font-semibold text-lg flex-1"
+            className="border-0 focus:ring-0 text-center font-bold text-lg flex-1 bg-transparent"
           />
           <button
             onClick={incrementQuantity}
-            className="px-3 py-2 text-gray-600 hover:bg-gray-100"
+            className="px-4 py-2 text-muted-foreground hover:bg-secondary/50 transition-colors"
           >
             +
           </button>
         </div>
-        <p className="text-xs text-gray-500 mt-1">
-          Minimum order: {product.moq || 1} unit(s)
+        <p className="text-xs text-muted-foreground mt-2">
+          Minimum order: {product.moq || 1} unit{product.moq > 1 ? 's' : ''}
         </p>
       </div>
 
@@ -78,25 +78,25 @@ const BulkDiscountCalculator = ({ product, onQuantityChange }) => {
       {pricing && (
         <div className="space-y-4">
           {/* Unit Price */}
-          <div className="flex justify-between items-center">
-            <span className="text-gray-700">Unit Price:</span>
-            <span className="font-semibold text-gray-900">
+          <div className="flex justify-between items-center py-2 border-b border-primary/10">
+            <span className="text-sm text-muted-foreground">Unit Price:</span>
+            <span className="font-semibold text-foreground">
               ₹{pricing.price.toLocaleString()}
             </span>
           </div>
 
           {/* Discount Badge */}
           {pricing.discountPercentage > 0 && (
-            <div className="bg-green-50 border border-green-200 rounded-lg p-3">
+            <div className="bg-success/10 border border-success/30 rounded-lg p-3">
               <div className="flex justify-between items-center">
-                <span className="text-green-900 font-medium">
-                  Discount Applied
+                <span className="text-sm font-semibold text-success">
+                  Bulk Discount Applied
                 </span>
-                <span className="bg-green-100 text-green-700 font-bold px-3 py-1 rounded-full text-sm">
+                <span className="bg-success/20 text-success font-bold px-3 py-1 rounded-full text-sm">
                   {pricing.discountPercentage}% OFF
                 </span>
               </div>
-              <p className="text-xs text-green-700 mt-1">
+              <p className="text-xs text-success/80 mt-2">
                 You save ₹{pricing.discount.toLocaleString()} per unit
               </p>
             </div>
@@ -104,36 +104,36 @@ const BulkDiscountCalculator = ({ product, onQuantityChange }) => {
 
           {/* Bulk Pricing Tiers */}
           {product.bulkPrices && product.bulkPrices.length > 0 && (
-            <div className="bg-white rounded-lg p-3 border border-gray-200">
-              <p className="text-xs font-semibold text-gray-700 mb-2">
+            <div className="bg-card rounded-lg p-3 border border-border/50">
+              <p className="text-xs font-semibold text-foreground mb-3">
                 Available Bulk Tiers:
               </p>
-              <div className="space-y-1">
+              <div className="space-y-2">
                 {product.bulkPrices.map((tier, idx) => {
                   const savings = ((product.price - tier.price) / product.price * 100).toFixed(0);
                   return (
                     <div
                       key={idx}
-                      className={`text-xs p-2 rounded flex justify-between items-center ${
+                      className={`text-xs p-3 rounded-md flex justify-between items-center transition-colors ${
                         quantity >= tier.quantity
-                          ? 'bg-blue-100 border border-blue-300'
-                          : 'bg-gray-100'
+                          ? 'bg-primary/10 border border-primary/30'
+                          : 'bg-secondary/30 border border-border/30'
                       }`}
                     >
-                      <span className="text-gray-700">
+                      <span className="text-foreground font-medium">
                         {tier.quantity}+ units
                       </span>
                       <div className="flex items-center gap-2">
                         <span
                           className={
                             quantity >= tier.quantity
-                              ? 'font-semibold text-blue-700'
-                              : 'text-gray-600'
+                              ? 'font-semibold text-primary'
+                              : 'text-muted-foreground'
                           }
                         >
                           ₹{tier.price.toLocaleString()}
                         </span>
-                        <span className="text-gray-500">({savings}%)</span>
+                        <span className="text-muted-foreground text-xs">({savings}%)</span>
                       </div>
                     </div>
                   );
@@ -143,21 +143,21 @@ const BulkDiscountCalculator = ({ product, onQuantityChange }) => {
           )}
 
           {/* Total Price */}
-          <div className="bg-white rounded-lg p-4 border-2 border-blue-300">
-            <p className="text-gray-600 text-sm mb-1">Total Order Value</p>
+          <div className="bg-primary rounded-lg p-4 border border-primary/20">
+            <p className="text-primary-foreground/80 text-sm mb-2">Total Order Value</p>
             <div className="flex justify-between items-center">
-              <span className="text-3xl font-bold text-blue-600">
+              <span className="text-3xl font-bold text-primary-foreground">
                 ₹{pricing.total.toLocaleString()}
               </span>
               <div className="text-right">
-                <p className="text-xs text-gray-500">for {quantity} unit(s)</p>
+                <p className="text-xs text-primary-foreground/70">for {quantity} unit{quantity > 1 ? 's' : ''}</p>
               </div>
             </div>
           </div>
 
           {/* CTA */}
-          <Button className="w-full" size="lg">
-            Get Detailed Quote
+          <Button className="w-full" size="lg" variant="default">
+            Request Quote Now
           </Button>
         </div>
       )}

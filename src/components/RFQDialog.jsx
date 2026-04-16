@@ -72,22 +72,22 @@ const RFQDialog = ({ isOpen, onClose, product }) => {
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-md">
         <DialogHeader>
-          <DialogTitle>Request for Quote (RFQ)</DialogTitle>
+          <DialogTitle className="text-lg font-bold">Request for Quote</DialogTitle>
         </DialogHeader>
 
-        <div className="bg-blue-50 p-3 rounded mb-4">
-          <p className="text-sm font-semibold text-blue-900 mb-1">
+        <div className="bg-primary/5 border border-primary/20 p-4 rounded-lg mb-4">
+          <p className="text-sm font-semibold text-foreground mb-1">
             {product.name}
           </p>
-          <p className="text-sm text-blue-700">
-            Base Price: ₹{product.price.toLocaleString()}
+          <p className="text-sm text-muted-foreground">
+            Base Price: <span className="font-bold text-primary">₹{product.price.toLocaleString()}</span>
           </p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="text-sm font-medium text-gray-700 block mb-1">
-              Contact Name *
+            <label className="text-sm font-semibold text-foreground block mb-2">
+              Contact Name <span className="text-destructive">*</span>
             </label>
             <Input
               type="text"
@@ -95,13 +95,14 @@ const RFQDialog = ({ isOpen, onClose, product }) => {
               value={formData.contactName}
               onChange={handleChange}
               placeholder="Your name"
+              className="border-border/50 bg-secondary/30"
               required
             />
           </div>
 
           <div>
-            <label className="text-sm font-medium text-gray-700 block mb-1">
-              Hospital/Organization Name *
+            <label className="text-sm font-semibold text-foreground block mb-2">
+              Hospital/Organization Name <span className="text-destructive">*</span>
             </label>
             <Input
               type="text"
@@ -109,14 +110,15 @@ const RFQDialog = ({ isOpen, onClose, product }) => {
               value={formData.hospitalName}
               onChange={handleChange}
               placeholder="Hospital name"
+              className="border-border/50 bg-secondary/30"
               required
             />
           </div>
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="text-sm font-medium text-gray-700 block mb-1">
-                Email *
+              <label className="text-sm font-semibold text-foreground block mb-2">
+                Email <span className="text-destructive">*</span>
               </label>
               <Input
                 type="email"
@@ -124,12 +126,13 @@ const RFQDialog = ({ isOpen, onClose, product }) => {
                 value={formData.email}
                 onChange={handleChange}
                 placeholder="Email"
+                className="border-border/50 bg-secondary/30"
                 required
               />
             </div>
             <div>
-              <label className="text-sm font-medium text-gray-700 block mb-1">
-                Phone *
+              <label className="text-sm font-semibold text-foreground block mb-2">
+                Phone <span className="text-destructive">*</span>
               </label>
               <Input
                 type="tel"
@@ -137,14 +140,15 @@ const RFQDialog = ({ isOpen, onClose, product }) => {
                 value={formData.phone}
                 onChange={handleChange}
                 placeholder="Phone"
+                className="border-border/50 bg-secondary/30"
                 required
               />
             </div>
           </div>
 
           <div>
-            <label className="text-sm font-medium text-gray-700 block mb-1">
-              Quantity *
+            <label className="text-sm font-semibold text-foreground block mb-2">
+              Quantity <span className="text-destructive">*</span>
             </label>
             <Input
               type="number"
@@ -152,15 +156,16 @@ const RFQDialog = ({ isOpen, onClose, product }) => {
               value={formData.quantity}
               onChange={handleChange}
               min={product.moq || 1}
+              className="border-border/50 bg-secondary/30"
               required
             />
-            <p className="text-xs text-gray-500 mt-1">
-              Minimum order: {product.moq || 1} unit(s)
+            <p className="text-xs text-muted-foreground mt-1.5">
+              Minimum order: {product.moq || 1} unit{product.moq > 1 ? 's' : ''}
             </p>
           </div>
 
           <div>
-            <label className="text-sm font-medium text-gray-700 block mb-1">
+            <label className="text-sm font-semibold text-foreground block mb-2">
               Message (Optional)
             </label>
             <textarea
@@ -168,7 +173,7 @@ const RFQDialog = ({ isOpen, onClose, product }) => {
               value={formData.message}
               onChange={handleChange}
               placeholder="Any special requirements or questions?"
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+              className="w-full px-3 py-2 border border-border/50 rounded-md bg-secondary/30 focus:outline-none focus:ring-2 focus:ring-primary/50 text-sm"
               rows="3"
             ></textarea>
           </div>
