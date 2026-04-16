@@ -2,10 +2,10 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent, CardFooter } from "@/components/ui/Card";
-import { Badge } from "@/components/ui/badge";
+import { Badge } from "@/components/ui/Badge";
 import { useCart } from "@/context/CartContext";
 import { Heart, Star, ShoppingCart } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/Utils";
 
 export function ProductCard({ product, className }) {
   const [isLiked, setIsLiked] = useState(false);

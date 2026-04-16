@@ -1,5 +1,5 @@
 import * as React from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/Utils";
 
 // Card Root
 const Card = React.forwardRef((props, ref) => {

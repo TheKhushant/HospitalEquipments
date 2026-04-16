@@ -2,7 +2,7 @@ import React from "react";
 import * as CheckboxPrimitive from "@radix-ui/react-checkbox";
 import { Check } from "lucide-react";
 
-import { cn } from "@/lib/utils"; // Utility function for className merging
+import { cn } from "@/lib/Utils"; // Utility function for className merging
 
 const Checkbox = React.forwardRef(({ className, ...props }, ref) => (
   <CheckboxPrimitive.Root
