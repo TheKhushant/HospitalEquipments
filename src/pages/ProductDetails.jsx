@@ -119,7 +119,6 @@ const ProductDetail = () => {
                 src={product.image}
                 alt={product.name}
                 className="w-full h-full object-cover"
-                className="w-full h-96 lg:h-[500px] object-cover"
               />
               {discountPercentage > 0 && (
                 <Badge className="absolute top-4 left-4 bg-destructive text-destructive-foreground">
@@ -279,12 +278,11 @@ const ProductDetail = () => {
               <div className="flex gap-2">
                 <Button
                   variant="outline"
-                  className="flex-1"
-                  onClick={() => toggleComparison(product)}
                   className={cn(
                     "flex-1",
-                    isInComparison(product.id) && "bg-blue-50 border-blue-500"
+                    isInComparison(product.id) && "bg-primary/10 border-primary"
                   )}
+                  onClick={() => toggleComparison(product)}
                 >
                   <Scale className="h-4 w-4 mr-2" />
                   {isInComparison(product.id) ? "In Comparison" : "Compare"}
