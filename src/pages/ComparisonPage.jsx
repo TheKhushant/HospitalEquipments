@@ -11,18 +11,18 @@ const ComparisonPage = () => {
 
   if (comparisonItems.length === 0) {
     return (
-      <div className="min-h-screen bg-gray-50 py-12 px-4">
-        <div className="max-w-7xl mx-auto">
-          <h1 className="text-3xl font-bold text-gray-900 mb-8">
+      <div className="min-h-screen bg-background py-16 px-4">
+        <div className="max-w-4xl mx-auto">
+          <h1 className="text-4xl font-bold text-foreground mb-12">
             Product Comparison
           </h1>
-          <div className="bg-white rounded-lg shadow-sm p-12 text-center">
-            <p className="text-gray-600 mb-6">
+          <div className="bg-card rounded-lg border border-border/50 shadow-sm p-16 text-center">
+            <p className="text-muted-foreground mb-8 text-lg">
               No products selected for comparison. Add products from the shop to
-              compare them.
+              compare them side by side.
             </p>
             <Link to="/shop">
-              <Button>Browse Products</Button>
+              <Button size="lg">Browse Products</Button>
             </Link>
           </div>
         </div>
@@ -41,43 +41,43 @@ const ComparisonPage = () => {
   });
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4">
+    <div className="min-h-screen bg-background py-16 px-4">
       <div className="max-w-7xl mx-auto">
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">
-            Compare Products ({comparisonItems.length})
+        <div className="flex justify-between items-center mb-12">
+          <h1 className="text-4xl font-bold text-foreground">
+            Compare Products <span className="text-primary">({comparisonItems.length})</span>
           </h1>
-          <Button variant="outline" onClick={clearComparison}>
+          <Button variant="outline" onClick={clearComparison} className="border-border/50">
             Clear All
           </Button>
         </div>
 
-        <div className="bg-white rounded-lg shadow-sm overflow-x-auto">
+        <div className="bg-card rounded-lg border border-border/50 shadow-sm overflow-x-auto">
           <table className="w-full">
             <tbody>
               {/* Product Cards Header */}
-              <tr className="border-b">
-                <td className="p-4 font-semibold text-gray-900 bg-gray-50 w-48">
+              <tr className="border-b border-border/50">
+                <td className="p-5 font-semibold text-foreground bg-secondary/30 w-48">
                   Product
                 </td>
                 {comparisonItems.map((product) => (
-                  <td key={product.id} className="p-4 border-l min-w-56">
+                  <td key={product.id} className="p-5 border-l border-border/50 min-w-56">
                     <div className="flex flex-col items-start">
                       <button
                         onClick={() => removeFromComparison(product.id)}
-                        className="text-gray-400 hover:text-red-500 mb-2"
+                        className="text-muted-foreground hover:text-destructive mb-3 transition-colors"
                       >
                         <X size={20} />
                       </button>
                       <img
                         src={product.image}
                         alt={product.name}
-                        className="h-40 object-contain mb-3"
+                        className="h-40 object-contain mb-4 bg-secondary/30 p-2 rounded"
                       />
-                      <h3 className="font-semibold text-gray-900 mb-1 text-sm">
+                      <h3 className="font-semibold text-foreground mb-1 text-sm line-clamp-2">
                         {product.name}
                       </h3>
-                      <p className="text-xs text-gray-500 mb-3">
+                      <p className="text-xs text-muted-foreground mb-4">
                         {product.subCategory}
                       </p>
                     </div>
@@ -86,18 +86,18 @@ const ComparisonPage = () => {
               </tr>
 
               {/* Price Row */}
-              <tr className="border-b">
-                <td className="p-4 font-semibold text-gray-700 bg-gray-50">
+              <tr className="border-b border-border/50">
+                <td className="p-5 font-semibold text-foreground bg-secondary/30">
                   Price
                 </td>
                 {comparisonItems.map((product) => (
-                  <td key={product.id} className="p-4 border-l">
-                    <div className="flex flex-col">
-                      <span className="text-2xl font-bold text-blue-600">
+                  <td key={product.id} className="p-5 border-l border-border/50">
+                    <div className="flex flex-col gap-2">
+                      <span className="text-2xl font-bold text-primary">
                         ₹{product.price.toLocaleString()}
                       </span>
                       {product.originalPrice && (
-                        <span className="text-sm text-gray-500 line-through">
+                        <span className="text-sm text-muted-foreground line-through">
                           ₹{product.originalPrice.toLocaleString()}
                         </span>
                       )}

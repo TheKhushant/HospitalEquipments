@@ -202,10 +202,10 @@ const ProductDetail = () => {
 
               {/* MOQ Info */}
               {product.moq && (
-                <div className="flex items-center gap-2 mb-6 p-3 bg-blue-50 rounded-lg">
-                  <Scale className="h-4 w-4 text-blue-600" />
-                  <span className="text-sm text-blue-900">
-                    Minimum Order Quantity: <strong>{product.moq}</strong> unit(s)
+                <div className="flex items-center gap-3 mb-6 p-4 bg-primary/5 border border-primary/20 rounded-lg">
+                  <Scale className="h-5 w-5 text-primary flex-shrink-0" />
+                  <span className="text-sm font-medium text-foreground">
+                    Minimum Order Quantity: <span className="font-bold text-primary">{product.moq}</span> unit{product.moq > 1 ? 's' : ''}
                   </span>
                 </div>
               )}

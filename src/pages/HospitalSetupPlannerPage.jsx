@@ -48,22 +48,22 @@ const HospitalSetupPlannerPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4">
+    <div className="min-h-screen bg-background py-16 px-4">
       <div className="max-w-7xl mx-auto">
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">
+        <div className="mb-12">
+          <h1 className="text-4xl lg:text-5xl font-bold text-foreground mb-4">
             Hospital Equipment Planner
           </h1>
-          <p className="text-gray-600">
-            Select a facility template or customize equipment for your needs
+          <p className="text-lg text-muted-foreground max-w-2xl">
+            Select a facility template or customize equipment for your specific healthcare needs
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Left Column - Template Selection */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-lg shadow-sm p-6 sticky top-4">
-              <h2 className="text-lg font-semibold text-gray-900 mb-4">
+            <div className="bg-card rounded-lg border border-border/50 shadow-sm p-6 sticky top-24">
+              <h2 className="text-lg font-semibold text-foreground mb-6 pb-4 border-b border-border/50">
                 Select Setup
               </h2>
 
