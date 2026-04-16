@@ -12,67 +12,67 @@ import {
 
 export function Hero() {
   return (
-    <section className="relative bg-gradient-to-r from-primary/5 via-primary/3 to-primary/5">
-      <div className="container mx-auto px-4 py-16 lg:py-24">
+    <section className="relative overflow-hidden bg-white">
+      {/* Background accent */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent" />
+      
+      <div className="container mx-auto px-4 py-16 lg:py-28 relative">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
           <div className="space-y-8">
-            <div className="space-y-4">
-              <Badge className="bg-success text-success-foreground">
-                <CheckCircle className="h-3 w-3 mr-1" />
-                FDA Approved Products
-              </Badge>
-              <h1 className="text-4xl lg:text-6xl font-display font-bold text-foreground leading-tight">
-                Professional{" "}
-                <span className="text-primary">Medical Equipment</span> You Can
-                Trust
+            <div className="space-y-6">
+              <div className="inline-flex items-center gap-2 bg-success/10 px-4 py-2 rounded-full">
+                <CheckCircle className="h-4 w-4 text-success" />
+                <span className="text-sm font-semibold text-success">FDA & CE Approved Products</span>
+              </div>
+              <h1 className="text-5xl lg:text-6xl font-bold text-foreground leading-tight text-balance">
+                Professional Medical Equipment For Modern Healthcare
               </h1>
-              <p className="text-lg text-muted-foreground max-w-xl">
-                Discover our comprehensive range of hospital-grade medical
-                equipment and supplies. From patient monitoring systems to
-                surgical instruments, we provide healthcare professionals with
-                reliable, certified solutions.
+              <p className="text-lg text-muted-foreground max-w-2xl leading-relaxed">
+                Trusted by 500+ hospitals and healthcare facilities worldwide. We provide hospital-grade medical equipment, diagnostic systems, and surgical instruments backed by expert support.
               </p>
             </div>
 
             {/* Trust Indicators */}
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-3 gap-4 pt-4">
               {[
                 {
-                  icon: <Shield className="h-8 w-8 text-primary" />,
+                  icon: <Shield className="h-6 w-6 text-primary" />,
                   title: "FDA Certified",
                   desc: "All products approved",
                 },
                 {
-                  icon: <Award className="h-8 w-8 text-primary" />,
+                  icon: <Award className="h-6 w-6 text-primary" />,
                   title: "ISO 13485",
                   desc: "Quality certified",
                 },
                 {
-                  icon: <Clock className="h-8 w-8 text-primary" />,
+                  icon: <Clock className="h-6 w-6 text-primary" />,
                   title: "24/7 Support",
                   desc: "Expert assistance",
                 },
               ].map((item, i) => (
-                <div key={i} className="text-center">
+                <div key={i} className="bg-secondary/50 rounded-lg p-3 border border-border/50">
                   <div className="flex items-center justify-center mb-2">
                     {item.icon}
                   </div>
-                  <p className="text-sm font-medium">{item.title}</p>
-                  <p className="text-xs text-muted-foreground">{item.desc}</p>
+                  <p className="text-sm font-semibold text-center text-foreground">{item.title}</p>
+                  <p className="text-xs text-muted-foreground text-center">{item.desc}</p>
                 </div>
               ))}
             </div>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row gap-4 pt-4">
               <Button size="lg" className="text-lg px-8" asChild>
                 <Link to="/shop">
-                  Shop Now <ArrowRight className="ml-2 h-5 w-5" />
+                  Explore Products <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
               </Button>
-              <Button variant="outline" size="lg" className="text-lg px-8">
-                Browse Catalog
+              <Button variant="outline" size="lg" className="text-lg px-8" asChild>
+                <Link to="/hospital-planner">
+                  Hospital Planning
+                </Link>
               </Button>
             </div>
 

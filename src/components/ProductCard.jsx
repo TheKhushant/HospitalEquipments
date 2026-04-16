@@ -48,39 +48,38 @@ export function ProductCard({ product, className }) {
   return (
     <Card
       className={cn(
-        "group hover:shadow-lg transition-shadow duration-300",
+        "group overflow-hidden border border-border/50 hover:border-primary/30 hover:shadow-md transition-all duration-300",
         className
       )}
     >
       <Link to={`/product/${product.id}`} className="block">
-        <div className="relative overflow-hidden rounded-t-lg">
+        <div className="relative overflow-hidden bg-secondary h-56">
           <img
             src={product.image}
             alt={product.name}
-            className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
           />
 
           {/* Discount Badge */}
           {discountPercentage > 0 && (
-            <Badge className="absolute top-2 left-2 bg-destructive text-destructive-foreground">
-              -{discountPercentage}%
+            <Badge className="absolute top-3 left-3 bg-destructive text-destructive-foreground font-semibold px-3">
+              Save {discountPercentage}%
             </Badge>
           )}
 
           {/* Stock Status */}
-          <Badge
-            variant={product.inStock ? "default" : "secondary"}
-            className="absolute top-2 right-2"
-          >
-            {product.inStock ? "In Stock" : "Out of Stock"}
-          </Badge>
+          {!product.inStock && (
+            <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+              <span className="text-white font-semibold">Out of Stock</span>
+            </div>
+          )}
 
           {/* Like Button */}
           <Button
             variant="ghost"
             size="icon"
             className={cn(
-              "absolute bottom-2 right-2 bg-white/80 hover:bg-white",
+              "absolute bottom-3 right-3 bg-white/90 hover:bg-white shadow-sm",
               isLiked && "text-red-500"
             )}
             onClick={toggleLike}
@@ -89,67 +88,66 @@ export function ProductCard({ product, className }) {
           </Button>
         </div>
 
-        <CardContent className="p-4">
-          <div className="space-y-2">
-            {/* Category */}
-            <Badge variant="outline" className="text-xs">
+        <CardContent className="p-4 space-y-3">
+          {/* Category & SubCategory */}
+          <div className="flex gap-2 flex-wrap">
+            <Badge variant="secondary" className="text-xs font-medium">
               {product.category}
             </Badge>
-            <br />
-             {/* SubCategory */}
-            <Badge variant="outline" className="text-xs">
-              {product.subCategory}
-            </Badge>
-            {/* Product Name */}
-            <h3 className="font-semibold text-sm leading-tight line-clamp-2 min-h-[2.5rem]">
-              {product.name}
-            </h3>
+            {product.subCategory && (
+              <Badge variant="outline" className="text-xs">
+                {product.subCategory}
+              </Badge>
+            )}
+          </div>
 
-            {/* Rating */}
-            <div className="flex items-center gap-2">
-              <div className="flex items-center">
-                {[...Array(5)].map((_, i) => (
-                  <Star
-                    key={i}
-                    className={cn(
-                      "h-3 w-3",
-                      i < Math.floor(product.rating)
-                        ? "text-yellow-400 fill-current"
-                        : "text-gray-300"
-                    )}
-                  />
-                ))}
-              </div>
-              <span className="text-xs text-muted-foreground">
-                {product.rating} ({product.reviewCount})
-              </span>
+          {/* Product Name */}
+          <h3 className="font-semibold text-sm leading-tight line-clamp-2 min-h-[2.5rem] text-foreground">
+            {product.name}
+          </h3>
+
+          {/* Rating */}
+          <div className="flex items-center gap-2">
+            <div className="flex items-center">
+              {[...Array(5)].map((_, i) => (
+                <Star
+                  key={i}
+                  className={cn(
+                    "h-3.5 w-3.5",
+                    i < Math.floor(product.rating)
+                      ? "text-yellow-500 fill-current"
+                      : "text-gray-300"
+                  )}
+                />
+              ))}
             </div>
+            <span className="text-xs font-medium text-muted-foreground">
+              {product.rating} <span className="text-gray-400">({product.reviewCount})</span>
+            </span>
+          </div>
 
-            {/* Price */}
-            <div className="flex items-center gap-2">
-              <span className="font-bold text-lg text-primary">
+          {/* Price Section */}
+          <div className="pt-1 border-t border-border/50">
+            <div className="flex items-baseline gap-2">
+              <span className="text-lg font-bold text-primary">
                 {formatPrice(product.price)}
               </span>
               {product.originalPrice && (
-                <span className="text-sm text-muted-foreground line-through">
+                <span className="text-xs text-muted-foreground line-through">
                   {formatPrice(product.originalPrice)}
                 </span>
               )}
             </div>
+          </div>
 
-            {/* Features Preview */}
-            <div className="text-xs text-muted-foreground">
-              <p className="line-clamp-2">{product.description}</p>
-            </div>
-            
-            {/* MOQ */}
+          {/* MOQ & Certifications */}
+          <div className="space-y-2 pt-1">
             {product.moq && (
-              <div className="text-xs text-blue-600 font-semibold">
-                MOQ: {product.moq} unit(s)
+              <div className="text-xs font-semibold text-primary/80 bg-primary/5 px-2 py-1 rounded w-fit">
+                MOQ: {product.moq} unit{product.moq > 1 ? 's' : ''}
               </div>
             )}
 
-            {/* Certifications */}
             {product.certifications && product.certifications.length > 0 && (
               <div className="flex gap-1 flex-wrap">
                 {product.certifications.slice(0, 2).map((cert) => (

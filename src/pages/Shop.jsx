@@ -100,39 +100,40 @@ const Shop = () => {
   const FilterSidebar = () => (
     <div className="space-y-6">
       {/* Search */}
-      <div className="space-y-2">
-        <Label htmlFor="search">Search Products</Label>
+      <div className="space-y-3">
+        <Label htmlFor="search" className="font-semibold">Search Products</Label>
         <div className="relative">
-          <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
             id="search"
-            placeholder="Search medical equipment..."
+            placeholder="Search equipment..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="pl-10"
+            className="pl-10 border-border/50 bg-secondary/30"
           />
         </div>
       </div>
 
       {/* Categories */}
       <div className="space-y-3">
-        <Label>Categories</Label>
+        <Label className="font-semibold">Categories</Label>
         <div className="space-y-2">
           {categories.map((category) => (
-            <div key={category.id} className="flex items-center space-x-2">
+            <div key={category.id} className="flex items-center space-x-3 p-2 rounded-md hover:bg-secondary/50 transition-colors">
               <Checkbox
                 id={category.id}
                 checked={selectedCategories.includes(category.id)}
                 onCheckedChange={(checked) =>
                   handleCategoryChange(category.id, Boolean(checked))
                 }
+                className="cursor-pointer"
               />
               <Label
                 htmlFor={category.id}
-                className="text-sm cursor-pointer flex items-center gap-2"
+                className="text-sm cursor-pointer flex items-center gap-2 flex-1"
               >
                 <span>{category.icon}</span>
-                {category.name}
+                <span className="font-medium">{category.name}</span>
               </Label>
             </div>
           ))}
@@ -198,11 +199,11 @@ const Shop = () => {
 
         <div className="flex gap-8">
           {/* Sidebar */}
-          <div className="hidden lg:block w-80 shrink-0">
-            <div className="bg-card border rounded-lg p-6 sticky top-24">
-              <div className="flex items-center gap-2 mb-4">
-                <Filter className="h-5 w-5" />
-                <h2 className="font-semibold">Filters</h2>
+          <div className="hidden lg:block w-72 shrink-0">
+            <div className="bg-card border border-border/50 rounded-lg p-6 sticky top-24 shadow-sm">
+              <div className="flex items-center gap-2 mb-6 pb-4 border-b border-border/50">
+                <Filter className="h-5 w-5 text-primary" />
+                <h2 className="font-semibold text-foreground">Filters</h2>
               </div>
               <FilterSidebar />
             </div>
@@ -210,19 +211,19 @@ const Shop = () => {
 
           {/* Products List */}
           <div className="flex-1">
-            <div className="flex items-center justify-between mb-6">
-              <div className="flex items-center gap-4">
-                <p className="text-muted-foreground">
-                  {filteredProducts.length} products found
+            <div className="flex items-center justify-between mb-8 flex-wrap gap-4">
+              <div className="flex items-center gap-4 flex-wrap">
+                <p className="text-sm font-medium text-foreground">
+                  <span className="text-primary font-bold">{filteredProducts.length}</span> products
                 </p>
                 {selectedCategories.length > 0 && (
-                  <div className="flex gap-2">
+                  <div className="flex gap-2 flex-wrap">
                     {selectedCategories.map((categoryId) => {
                       const category = categories.find(
                         (c) => c.id === categoryId
                       );
                       return (
-                        <Badge key={categoryId} variant="secondary">
+                        <Badge key={categoryId} variant="secondary" className="font-medium">
                           {category?.name}
                         </Badge>
                       );
@@ -231,12 +232,12 @@ const Shop = () => {
                 )}
               </div>
 
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-3 flex-wrap">
                 {/* Mobile Sheet Filter */}
                 <Sheet open={showFilters} onOpenChange={setShowFilters}>
                   <SheetTrigger asChild>
-                    <Button variant="outline" className="lg:hidden">
-                      <SlidersHorizontal className="h-4 w-4 mr-2" />
+                    <Button variant="outline" className="lg:hidden gap-2">
+                      <SlidersHorizontal className="h-4 w-4" />
                       Filters
                     </Button>
                   </SheetTrigger>
@@ -252,17 +253,13 @@ const Shop = () => {
 
                 {/* Sort */}
                 <Select value={sortBy} onValueChange={setSortBy}>
-                  <SelectTrigger className="w-48">
+                  <SelectTrigger className="w-40 border-border/50">
                     <SelectValue placeholder="Sort by" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="featured">Featured</SelectItem>
-                    <SelectItem value="price-low">
-                      Price: Low to High
-                    </SelectItem>
-                    <SelectItem value="price-high">
-                      Price: High to Low
-                    </SelectItem>
+                    <SelectItem value="price-low">Price: Low to High</SelectItem>
+                    <SelectItem value="price-high">Price: High to Low</SelectItem>
                     <SelectItem value="rating">Highest Rated</SelectItem>
                     <SelectItem value="name">Name A-Z</SelectItem>
                   </SelectContent>
