@@ -8,7 +8,7 @@ import {
   TabsList,
   TabsTrigger,
 } from "../components/ui/Tabs.jsx";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
 import { Separator } from "../components/ui/Separator";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
