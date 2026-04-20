@@ -3,6 +3,9 @@ import DashboardCard from "@/components/admin/DashboardCard";
 import RevenueChart from "@/components/admin/RevenueChart";
 import ProductTable from "@/components/admin/ProductTable";
 import InventoryAlert from "@/components/admin/InventoryAlert";
+import ProductAnalysisChart from "@/components/admin/ProductAnalysisChart";
+import CustomerAnalysisChart from "@/components/admin/CustomerAnalysisChart";
+import StockAnalysisChart from "@/components/admin/StockAnalysisChart";
 import {
   Package,
   TrendingUp,
@@ -39,12 +42,31 @@ const revenueByPeriod = {
   ],
 };
 
+// Mock data for customer growth
+const customerGrowthData = [
+  { month: "Jan", customers: 1250 },
+  { month: "Feb", customers: 1420 },
+  { month: "Mar", customers: 1680 },
+  { month: "Apr", customers: 1950 },
+  { month: "May", customers: 2310 },
+  { month: "Jun", customers: 2780 },
+  { month: "Jul", customers: 3250 },
+  { month: "Aug", customers: 3680 },
+  { month: "Sep", customers: 4120 },
+  { month: "Oct", customers: 4580 },
+  { month: "Nov", customers: 4950 },
+  { month: "Dec", customers: 5340 },
+];
+
 const AdminDashboard = () => {
   const [period, setPeriod] = useState("30");
 
   const dashboardData = useMemo(() => {
     const sortedProducts = [...products].sort((a, b) => b.reviewCount - a.reviewCount);
     const inStockProducts = products.filter((product) => product.inStock);
+    const outOfStockProducts = products.filter((product) => !product.inStock);
+    const lowStockProducts = products.filter((product) => product.reviewCount < 150);
+    
     const lowStock = products
       .filter((product) => product.reviewCount < 150)
       .slice(0, 3)
@@ -53,6 +75,19 @@ const AdminDashboard = () => {
         name: product.name,
         stock: product.inStock ? Math.max(1, Math.floor(product.reviewCount / 60)) : 0,
       }));
+
+    // Prepare top products data for ProductAnalysisChart
+    const topProductsForChart = sortedProducts.slice(0, 6).map((product) => ({
+      name: product.name.length > 20 ? product.name.substring(0, 20) + '...' : product.name,
+      sales: product.reviewCount,
+    }));
+
+    // Prepare stock analysis data
+    const stockAnalysisData = [
+      { name: "In Stock", value: inStockProducts.length },
+      { name: "Low Stock", value: lowStockProducts.length },
+      { name: "Out of Stock", value: outOfStockProducts.length },
+    ];
 
     return {
       totalProducts: products.length,
@@ -72,8 +107,12 @@ const AdminDashboard = () => {
       })),
       lowStock,
       inStockCount: inStockProducts.length,
+      outOfStockCount: outOfStockProducts.length,
+      lowStockCount: lowStockProducts.length,
       averageRating:
         products.reduce((sum, product) => sum + product.rating, 0) / products.length,
+      topProductsForChart,
+      stockAnalysisData,
     };
   }, []);
 
@@ -95,33 +134,34 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background p-6 lg:p-10">
+    <div className="min-h-screen bg-gray-50 p-6 lg:p-10">
       <div className="max-w-screen-2xl mx-auto">
         <div className="flex justify-between items-end mb-10 gap-6 flex-wrap">
           <div>
-            <h1 className="text-4xl font-display font-bold">Product Dashboard</h1>
-            <p className="text-muted-foreground">
+            <h1 className="text-4xl font-bold text-gray-900">Product Dashboard</h1>
+            <p className="text-gray-600 mt-2">
               Static overview of your product catalog, featured items, and availability
             </p>
           </div>
 
-          <Button onClick={exportCSV} variant="outline">
+          <Button onClick={exportCSV} variant="outline" className="shadow-sm">
             <Download className="mr-2 h-4 w-4" />
             Export Report
           </Button>
         </div>
 
-        <div className="bg-gradient-to-r from-blue-50 to-violet-50 dark:from-blue-950/30 dark:to-violet-950/30 border border-blue-200 rounded-3xl p-6 mb-10 flex items-center gap-4">
+        <div className="bg-gradient-to-r from-blue-50 to-violet-50 rounded-2xl p-6 mb-10 flex items-center gap-4 shadow-sm">
           <Sparkles className="h-8 w-8 text-blue-600" />
           <div>
             <span className="font-semibold">Static Insight:</span>{" "}
             Your catalog contains <span className="text-green-600 font-bold">{dashboardData.totalProducts}</span> products and <span className="text-green-600 font-bold">{dashboardData.inStockCount}</span> are available now.
-            <span className="ml-2 text-muted-foreground">
+            <span className="ml-2 text-gray-600">
               Average rating is {dashboardData.averageRating.toFixed(1)} stars.
             </span>
           </div>
         </div>
 
+        {/* KPI Cards */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
           <DashboardCard
             title="Total Products"
@@ -153,7 +193,8 @@ const AdminDashboard = () => {
           />
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        {/* Existing Charts Section */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
           <RevenueChart period={period} onPeriodChange={setPeriod} data={revenueByPeriod[period]} />
 
           <ProductTable
@@ -180,6 +221,29 @@ const AdminDashboard = () => {
                 { key: "name", label: "Product" },
                 { key: "views", label: "Views" },
               ]}
+            />
+          </div>
+        </div>
+
+        {/* New Advanced Analytics Section */}
+        <div className="mt-12">
+          <div className="mb-6">
+            <h2 className="text-2xl font-bold text-gray-900">Advanced Analytics</h2>
+            <p className="text-gray-600 mt-1">In-depth insights into product performance, customer growth, and inventory status</p>
+          </div>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <ProductAnalysisChart 
+              data={dashboardData.topProductsForChart} 
+              title="Product Performance"
+            />
+            <CustomerAnalysisChart 
+              data={customerGrowthData} 
+              title="Customer Growth"
+            />
+            <StockAnalysisChart 
+              data={dashboardData.stockAnalysisData} 
+              title="Stock Distribution"
             />
           </div>
         </div>

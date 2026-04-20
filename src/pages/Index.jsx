@@ -25,6 +25,7 @@ import {
   Mail,
 } from "lucide-react";
 import BulkDiscountSection from "../components/BulkDiscountSection";
+import LocationDeliverySection from "@/components/comparison/LocationDeliverySection.jsx";
 
 const Index = () => {
   return (
@@ -33,6 +34,8 @@ const Index = () => {
 
       {/* Hero Section */}
       <Hero />
+
+      <LocationDeliverySection />
 
       {/* Categories Section */}
       <section className="py-16 bg-muted/30">
