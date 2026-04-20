@@ -29,6 +29,7 @@ import {
   ArrowLeft,
 } from "lucide-react";
 import { cn } from "@/lib/Utils";
+import ProductRecommendations from "@/components/ProductRecommendations.jsx";
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -272,6 +273,11 @@ const ProductDetail = () => {
             </div>
           </div>
         </div>
+        
+        <ProductRecommendations 
+          productId={product.id} 
+          productName={product.name} 
+        />
 
         {/* Tabs */}
         <div className="mt-16">

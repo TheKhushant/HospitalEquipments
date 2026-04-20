@@ -114,7 +114,7 @@ export function Navigation() {
               className="hidden lg:flex"
               asChild
             >
-              <Link to="/login">Login</Link>
+              <Link to="/dashboard">Login</Link>
             </Button>
             <Button
               variant="default"
@@ -183,7 +183,7 @@ export function Navigation() {
                   {/* Login / Register (Mobile) */}
                   <div className="mt-6 space-y-2">
                     <Link
-                      to="/login"
+                      to="/dashboard"
                       className="block text-lg font-medium text-primary"
                       onClick={() => setIsOpen(false)}
                     >

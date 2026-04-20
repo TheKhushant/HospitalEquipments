@@ -24,6 +24,7 @@ import {
   Phone,
   Mail,
 } from "lucide-react";
+import BulkDiscountSection from "../components/BulkDiscountSection";
 
 const Index = () => {
   return (
@@ -156,6 +157,8 @@ const Index = () => {
           </div>
         </section>
       )}
+
+      <BulkDiscountSection/>
 
       {/* Why Choose Us */}
       <section className="py-16 bg-primary text-primary-foreground">
